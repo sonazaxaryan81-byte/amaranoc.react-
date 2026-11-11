@@ -36,6 +36,24 @@ export function initApp(){
   $('#emptyState').hidden=!!list.length;
   $('#loadMore').hidden=regular.length<=state.visible;
   bindCards();
+
+  if (state.sort === 'price') {
+  list.sort((a, b) => a.price - b.price);
+}
+
+if (state.sort === 'price-desc') {
+  list.sort((a, b) => b.price - a.price);
+}
+
+if (state.sort === 'rating') {
+  list.sort((a, b) => Number(b.rating) - Number(a.rating));
+}
+
+if (state.sort === 'guests') {
+  list.sort((a, b) => b.guests - a.guests);
+}
+
+return list;
  };
  function bindCards(){
 
@@ -81,6 +99,11 @@ $('#clearSearch').addEventListener('click', () => {
  $('#clearFilters').addEventListener('click',clear);$('#emptyClear').addEventListener('click',clear);
  $$('.category').forEach(b=>b.addEventListener('click',()=>{state.category=b.dataset.category;$$('.category').forEach(x=>x.classList.toggle('active',x===b));render()}));
  $('#sortBtn').addEventListener('click',()=>{state.sort=state.sort==='default'?'price':state.sort==='price'?'price-desc':'default';$('#sortBtn').textContent=state.sort==='price'?'Գին՝ աճող':state.sort==='price-desc'?'Գին՝ նվազող':'⇅ Դասավորել';render()});
+
+ $('#sortSelect').addEventListener('change', (e) => {
+  state.sort = e.target.value;
+  render();
+});
  $('#loadMore').addEventListener('click',()=>{state.visible+=12;render()});
  $('#favoritesTop').addEventListener('click',()=>{state.search='';render();const fav=[...state.favorites];if(!fav.length){toast('Նախընտրածների ցանկը դատարկ է');return}$('#resultCount').textContent=`${fav.length} նախընտրած առաջարկ`;$('#featuredGrid').innerHTML='';$('#regularGrid').innerHTML=listings.filter(x=>state.favorites.has(x.id)).map(card).join('');$('.regular-heading').hidden=false;$('.regular-heading span').textContent='Նախընտրածներ';$('.best-heading').hidden=true;bindCards()});
  $('#mapBtn').addEventListener('click',()=>toast('Քարտեզի ցուցադրումը ցուցադրական տարբերակում հասանելի չէ'));
