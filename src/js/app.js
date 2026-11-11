@@ -38,6 +38,15 @@ export function initApp(){
   bindCards();
  };
  function bindCards(){
+
+    if (state.search) {
+  const q = state.search.toLowerCase();
+
+  result = result.filter(item =>
+    item.name.toLowerCase().includes(q) ||
+    item.place.toLowerCase().includes(q)
+  );
+}
   $$('[data-fav]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const id=+b.dataset.fav;state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);render();toast(state.favorites.has(id)?'Ավելացվեց նախընտրածների մեջ':'Հեռացվեց նախընտրածներից')}));
   $$('[data-detail]').forEach(b=>b.addEventListener('click',()=>showDetail(+b.dataset.detail)));
   $$('.listing-card').forEach(c=>c.addEventListener('click',e=>{if(!e.target.closest('button'))showDetail(+c.dataset.id)}));
