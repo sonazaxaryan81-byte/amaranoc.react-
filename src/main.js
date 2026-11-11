@@ -18,11 +18,7 @@ document.querySelector('#app').innerHTML = `
       <div class="header-actions">
         <button class="icon-button" id="favoritesTop" title="Նախընտրածներ">♡</button>
         <button class="icon-button" id="languageBtn" title="Լեզու">◎</button>
-        <label class="header-search"><input id="topSearch" placeholder="Որոնում" /><button id="topSearchBtn">⌕</button></label>
-        <button class="login-btn" id="loginBtn">Մուտք</button>
-      </div>
-    </div>
-  </header>
+       
 
   <main id="home">
     <div class="mobile-filter-bar"><button id="openFilters">☷ Ֆիլտրեր</button><button id="mobileMap">⌖ Քարտեզ</button></div>

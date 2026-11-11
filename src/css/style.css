@@ -34,3 +34,13 @@ input:focus-visible {
   outline: 3px solid var(--orange);
   outline-offset: 4px;
 }
+#clearSearch {
+  cursor: pointer;
+  font-size: 20px;
+  color: #777;
+  transition: color 0.2s ease;
+}
+
+#clearSearch:hover {
+  color: var(--orange);
+}

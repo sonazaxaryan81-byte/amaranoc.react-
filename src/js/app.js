@@ -67,6 +67,12 @@ export function initApp(){
 // Live search — արդյունքները թարմացնել մուտքագրելիս
 $('#topSearch').addEventListener('input', e => {
   doSearch(e.target.value);
+// Clear search without resetting other filters
+$('#clearSearch').addEventListener('click', () => {
+  state.search = '';
+  $('#topSearch').value = '';
+  render();
+});
 });
  $('#topSearchBtn').addEventListener('click',()=>doSearch($('#topSearch').value));
  $('#topSearch').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch(e.target.value)});
