@@ -55,6 +55,10 @@ export function initApp(){
  $$('.place-filter,.amenity-filter,.type-filter').forEach(x=>x.addEventListener('change',render));
  ['priceMin','priceMax'].forEach(id=>$('#'+id).addEventListener('change',render));
  const doSearch=v=>{state.search=v.trim();$('#topSearch').value=v;render()};
+// Live search — արդյունքները թարմացնել մուտքագրելիս
+$('#topSearch').addEventListener('input', e => {
+  doSearch(e.target.value);
+});
  $('#topSearchBtn').addEventListener('click',()=>doSearch($('#topSearch').value));
  $('#topSearch').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch(e.target.value)});
  $('#applyFilters').addEventListener('click',render);
