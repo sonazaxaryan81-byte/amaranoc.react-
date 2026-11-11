@@ -76,3 +76,32 @@ export function initApp(){
  $('#contactForm').addEventListener('submit',e=>{e.preventDefault();$('#formMessage').textContent='Շնորհակալություն։ Ձեր տվյալները լրացվել են, և մենք կկապնվենք Ձեզ հետ։';e.target.reset()});
  render();
 }
+
+// Mobile navigation accessibility
+const mobileMenu = $('#mobileMenu');
+const mainNav = $('#mainNav');
+
+// Փակել մենյուն
+const closeMobileMenu = () => {
+  mainNav.classList.remove('open');
+  mobileMenu.setAttribute('aria-expanded', 'false');
+};
+
+// Բացել և փակել մենյուն
+mobileMenu.addEventListener('click', () => {
+  const isOpen = mainNav.classList.toggle('open');
+
+  mobileMenu.setAttribute('aria-expanded', String(isOpen));
+});
+
+// Հղման վրա սեղմելիս փակել մենյուն
+$$('#mainNav a').forEach(a => {
+  a.addEventListener('click', closeMobileMenu);
+});
+
+// Escape ստեղնով փակել մենյուն
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeMobileMenu();
+  }
+});
