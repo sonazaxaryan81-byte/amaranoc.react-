@@ -2,7 +2,9 @@ import { listings } from './data.js';
 
 export function initApp(){
  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
- const state={currency:'֏',guests:0,overnight:0,category:'all',search:'',sort:'default',favorites:new Set(),visible:32};
+ const state={currency:'֏',guests:0,overnight:0,category:'all',search:'',sort:'default',favorites: new Set(
+  JSON.parse(localStorage.getItem('amaranoc-favorites') || '[]').map(Number)
+),visible:32};
  const formatPrice=n=>{const rates={'֏':1,'$':1/390,'€':1/420,'₽':1/4.2};return `${Math.round(n*rates[state.currency]).toLocaleString('en-US')} ${state.currency}`};
  const selected=(selector)=>$$(selector).filter(x=>x.checked).map(x=>x.value);
  const filtered=()=>{
